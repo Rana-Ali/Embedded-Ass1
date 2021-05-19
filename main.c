@@ -14,7 +14,7 @@ struct student
     int ID;
     struct BirthDate birthDate;
     int score;
-};
+}*p;
 int main()
 {
     printf("Welcome to our project");
