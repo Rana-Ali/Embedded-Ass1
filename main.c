@@ -4,6 +4,9 @@
 #include <string.h>
 #include <time.h>
 
+//Sec:2 B.N:39 عاليا مصطفي صلاح الدين أمين بنداري
+//Sec:2 B.N:14 رنا علاء الدين حسن علي حسن النشيلي
+//Sec:2 B.N:10 رانا علي ابراهيم محمد
 
 int i,n;
 struct BirthDate
@@ -37,7 +40,7 @@ int main()
 
 {
 
-
+    printf("Welcome to our project\n");
 
     printf("Size of struct = %d \n",calculateStructSize());
     printf("Size taken by a node in memory = %d \n", sizeNode());
@@ -67,7 +70,7 @@ int main()
     printf("Time taken to insert in middle of linked list = %d seconds \n",end6-begin6);
     printList(head);
 
-    printf("Welcome to our project\n");
+    
 
 
     dynamicAllocate();
