@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +6,6 @@
 //Sec:2 B.N:39 عاليا مصطفي صلاح الدين أمين بنداري
 //Sec:2 B.N:14 رنا علاء الدين حسن علي حسن النشيلي
 //Sec:2 B.N:10 رانا علي ابراهيم محمد
-
 
 int i,n;
 struct BirthDate
@@ -41,8 +39,8 @@ int main()
 
 {
 
-    printf("Welcome to our project\n");
 
+    printf("Welcome to our project\n");
     printf("Size of struct = %d \n",calculateStructSize());
     printf("Size taken by a node in memory = %d \n", sizeNode());
 
@@ -71,7 +69,7 @@ int main()
     printf("Time taken to insert in middle of linked list = %d seconds \n",end6-begin6);
     printList(head);
 
-   
+
 
 
     dynamicAllocate();
@@ -252,6 +250,139 @@ void printArray()
     i=n;
 }
 
+void push(int Day,int Month, int Year,char name[100],int ID,int score)
+{
+    /* 1. allocate node */
+
+    struct studentNode* new_node = (struct Node*) malloc(sizeof(struct studentNode));
+
+    /* 2. put in the data  */
+    new_node->birthDate.Day = Day;
+    new_node->birthDate.Month = Month;
+    new_node->birthDate.Year = Year;
+    new_node->ID = ID;
+    new_node->score = score;
+    int cpyI;
+    for(cpyI=0; cpyI<100; cpyI++)
+    {
+        new_node->name[cpyI]=name[cpyI];
+    }
+    /* 3. Make next of new node as head */
+    new_node->next = (head);
+
+    /* 4. move the head to point to the new node */
+    (head)    = new_node;
+
+}
+
+// function to add new nodes
+
+
+/* Given a node prev_node, insert a new node after the given
+prev_node */
+void push_at(int Day,int Month, int Year,char name[100],int ID,int score, int position)
+{
+
+    //1. allocate node to new element
+    struct studentNode* newNode = (struct node*) malloc(sizeof(struct studentNode));
+    newNode->birthDate.Day=Day;
+    newNode->birthDate.Month=Month;
+    newNode->birthDate.Year=Year;
+    newNode->ID = ID;
+    int cpyI;
+    for(cpyI=0; cpyI<100; cpyI++)
+    {
+        newNode->name[cpyI]=name[cpyI];
+    }
+
+    newNode->next = NULL;
+
+    //2. check if the position is > 0
+    if(position < 1)
+    {
+        printf("\nposition should be >= 1.");
+    }
+    else if (position == 1)
+    {
+
+        //3. if the position is 1, make next of the
+        //   new node as head and new node as head
+        newNode->next = head;
+        head = newNode;
+    }
+    else
+    {
+
+        //4. Else, make a temp node and traverse to the
+        //   node previous to the position
+        struct studentNode* temp = head;
+        for(int i = 1; i < position-1; i++)
+        {
+            if(temp != NULL)
+            {
+                temp = temp->next;
+            }
+        }
+
+        //5. If the previous node is not null, make
+        //   newNode next as temp next and temp next
+        //   as newNode.
+        if(temp != NULL)
+        {
+            newNode->next = temp->next;
+            temp->next = newNode;
+        }
+        else
+        {
+
+            //6. When the previous node is null
+            printf("\nThe previous node is null.");
+        }
+    }
+
+
+}
+/* Given a reference (pointer to pointer) to the head
+   of a list and an int, appends a new node at the end  */
+void append(int Day,int Month, int Year,char name[],int ID,int score)
+{
+
+    /* 1. allocate node */
+    struct studentNode* new_node = (struct studentNode*) malloc(sizeof(struct studentNode));
+
+    struct studentNode *last = head;  /* used in step 5*/
+    /* 2. put in the data  */
+    new_node->birthDate.Day = Day;
+    new_node->birthDate.Month = Month;
+    new_node->birthDate.Year = Year;
+    new_node->ID = ID;
+    new_node->score = score;
+    int cpyI;
+    for(cpyI=0; cpyI<100; cpyI++)
+    {
+        new_node->name[cpyI]=name[cpyI];
+    }
+    /* 3. This new node is going to be the last node, so make next
+          of it as NULL*/
+    new_node->next = NULL;
+
+    /* 4. If the Linked List is empty, then make the new node as head */
+    if (head == NULL)
+    {
+        head = new_node;
+        return;
+    }
+
+    /* 5. Else traverse till the last node */
+    while (last->next != NULL)
+        last = last->next;
+
+    /* 6. Change the next of last node */
+    last->next = new_node;
+
+    return;
+
+}
 
 
 void printList(struct studentNode *head)
@@ -261,22 +392,24 @@ void printList(struct studentNode *head)
     {
 
 
-        printf("%s",current_node->name); printf(" ");
+        printf("%s",current_node->name);
+        printf(" ");
         printf("%d ", current_node->ID);
         printf("%d ", current_node->birthDate.Day);
         printf("%d ", current_node->birthDate.Month);
         printf("%d ", current_node->birthDate.Year);
         printf("\n");
-         current_node = current_node->next;
+        current_node = current_node->next;
 
 
     }
 }
 
-int sizeNode(){
-struct studentNode nodeStudent;
-int size=sizeof(nodeStudent);
-return size;
+int sizeNode()
+{
+    struct studentNode nodeStudent;
+    int size=sizeof(nodeStudent);
+    return size;
 }
 
 
